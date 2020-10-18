@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>HomeWork #2 - Olena Rudenko</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <style>
+        * {
+            color: black;
+            text-decoration: none;
+        }
+        
+        p {
+            color: brown;
+        }
+        
+        .class {
+            color: green;
+        }
+        
+        .example {
+            color: black;
+        }
+        
+        a {
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: underline;
+        }
+        
+        body {
+            font-size: 18px;
+            line-height: 25px;
+        }
+        
+        button {
+            font-size: 16px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            padding: 5px 10px;
+            display: block;
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>HomeWork #2 - Olena Rudenko</h2>
+
+    <h2 class="example">class="example"</h2>
+    <p class="example">class="example".</p>
+
+    <div id="one">one</div>
+    <button onclick="myExercise1()">Задание 1</button>
+    <button onclick="myExercise3()">Задание 3</button>
+    <button onclick="myExercise4()">Задание 4</button>
+
+
+
+
+
+    <script>
+        /* 1. Добавьте после дива с id=one еще один див с текстом two и id=two
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      На клик по id=two добавьте перед ним див с id - two_first, 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      а див с id=two измените на two_second 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+        function myExercise1() {
+            var newDiv = document.getElementById('one');
+            newDiv.insertAdjacentHTML('afterend', '<div id="two">two</div>');
+        }
+        /* 2. Перепишите все селекторы из первой папки 001_CSS_Selectors с помощью известных
+        Вам методов и свойств.*/
+
+        /* 3. В примере с классом добавьте к существующем классу, класс с именем newclass, 
+        а также выведите в консоль все стили что есть у элемента
+        с этим классом */
+
+        function myExercise3() {
+            var exampleElements = document.querySelectorAll(".example");
+
+            for (var i = exampleElements.length - 1; i >= 0; i--) {
+                exampleElements[i].classList.add("newclass");
+                var compStyles = window.getComputedStyle(exampleElements[i]);
+                console.log(compStyles);
+            }
+        }
+
+        /* 4. В примере с индентификатором добавьте свойства marginTop с значением 10px и 
+        background с значением red
+        */
+        function myExercise4() {
+            var element = document.getElementById('one');
+            element.style.marginTop = "10px";
+            element.style.background = "red";
+        }
+    </script>
+</body>
+
+</html>
