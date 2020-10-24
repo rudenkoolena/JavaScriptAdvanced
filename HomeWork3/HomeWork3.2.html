@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>HomeWork #3.2 - Olena Rudenko</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+
+</head>
+<!-- 
+    Запросите у пользователя ввести какую-то фразу. 
+    Отобразите каждое отдельное слово в виде списка ul li. 
+    Также отобразите первое слово UPPERCASE, а последние 2 с маленькой. 
+    Найдите все буквы "а" их количество в модальное окно. 
+ -->
+
+<body>
+    <h2>HomeWork #3.2 - Olena Rudenko</h2>
+    <p>Введите фразу: </p>
+    <div id="list"></div>
+    <input type="text" value="" id="myinput">
+    <button onclick="myFunction()">Click me</button>
+
+
+    <script>
+        function myFunction() {
+            var div = document.getElementById('list');
+            var ul = document.createElement('ul');
+            div.appendChild(ul);
+            var data = document.getElementById("myinput").value;
+            var substrs = data.split(" ");
+            for (var i = 0, l = substrs.length; i < l; i++) {
+                substrs[0] = substrs[0].toUpperCase();
+                substrs[l - 1] = substrs[l - 1].toLowerCase();
+                var li = document.createElement('li');
+                li.innerHTML = substrs[i];
+                ul.appendChild(li);
+            }
+            var numA = data.match(/[a]/g).length;
+            console.log(numA);
+        }
+    </script>
+
+</body>
+
+</html>

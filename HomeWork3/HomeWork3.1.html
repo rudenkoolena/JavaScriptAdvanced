@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HomeWork #3.1 - Olena Rudenko</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <!-- Создайте счетчик секунд, который начинает отчет с 1 и заканчивается на 30,
+также добавьте кнопки которые останавливают отчет, и запускают его заново и добавьте кнопку
+обнуляющую отcчет. Также попробуйте изменить код так чтобы отсчет начинался с 30 и заканчивался на 1. -->
+    <h2>HomeWork #3.1 - Olena Rudenko</h2>
+    <div class="container" id="container">1
+    </div>
+    <div class="container" id="container-reverse">10
+    </div>
+
+    <button onclick="setCounter()">Запустить счетчик</button>
+    <button onclick="stopCounter()">Остановить счетчик</button>
+    <button onclick="setReverseCounter()">Запустить обратный отсчет</button>
+    <button onclick="stopReverseCounter()">Остановить обратный отсчет</button>
+    <script>
+        var myCounter;
+
+        function setCounter() {
+            myCounter = setInterval(function() {
+                var counter = document.getElementById('container');
+                var count = Number(counter.innerHTML);
+                if (count > 9) {
+                    clearInterval(myCounter);
+                    alert('Отсчет завершен');
+                    counter.innerHTML = "1";
+                } else {
+                    counter.innerHTML = count += 1;
+                }
+            }, 1000);
+        }
+
+        function stopCounter() {
+            clearInterval(myCounter);
+        }
+
+        var myReverseCounter;
+
+        function setReverseCounter() {
+            myReverseCounter = setInterval(function() {
+                var counter = document.getElementById('container-reverse');
+                var count = Number(counter.innerHTML);
+                if (count < 1) {
+                    clearInterval(myReverseCounter);
+                    alert('Обратный отсчет завершен');
+                    counter.innerHTML = "10";
+                } else {
+                    counter.innerHTML = count -= 1;
+                }
+            }, 1000);
+        }
+
+        function stopReverseCounter() {
+            clearInterval(myReverseCounter);
+        }
+    </script>
+</body>
+
+</html>

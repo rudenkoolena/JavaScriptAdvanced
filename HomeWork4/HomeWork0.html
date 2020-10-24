@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HomeWork #4.0 - Olena Rudenko</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <!-- Напишите регулярные выражения, которые будут выбирать 
+    индекс - 55535 - 5 numbers
+    ip адресс, пример 255.255.255.255
+    цены в долларах - $0.84, $2.84, $4
+    дата в виде - 30/12/2016 - день, месяц, год
+ -->
+    <h2>HomeWork #4.0 - Olena Rudenko</h2>
+    <div class="container-input">
+        <span>Введите 5-значный индекс: </span>
+        <input type="text" value="" id="myIndex" onfocus="this.focused=true;">
+        <div class="info" id="index"></div>
+    </div>
+    <div class="container-input">
+        <span>Введите ip адресс (255.255.255.255):</span>
+        <input type="text" value="" id="myIp" onfocus="this.focused=true;">
+        <div class="info" id="ip"></div>
+    </div>
+    <div class="container-input">
+        <span>Введите цену в долларах ($0.84):</span>
+        <input type="text" value="" id="myPrice" onfocus="this.focused=true;">
+        <div class="info" id="price"></div>
+    </div>
+    <div class="container-input">
+        <span>Введите дату (30/12/2016): </span>
+        <input type="text" value="" id="myDate" onfocus="this.focused=true;">
+        <div class="info" id="date"></div>
+    </div>
+    <button onclick="myFunction()">Try</button>
+
+    <script>
+        // проверка на индекс 5 numbers
+        function checkIndex() {
+            var str = document.getElementById("myIndex").value;
+            var pattIndex = new RegExp(/^\d\d\d\d\d$/);
+            var res = pattIndex.test(str);
+            var info = document.getElementById('index');
+            if (res == false) {
+                info.innerHTML = "Индекс должен состоять из 5 цифр";
+                document.getElementById("myIndex").value = ' ';
+            } else {
+                info.innerHTML = "Индекс введен верно"
+            };
+        }
+
+        // проверка IP
+        function checkIp() {
+            var ip = document.getElementById("myIp").value;
+            var pattIp = new RegExp(/^(([1-9]?\d|1\d\d|2[0-5][0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|2[0-5][0-5]|2[0-4]\d)$/);
+            var resIp = pattIp.test(ip);
+            var infoIp = document.getElementById('ip');
+            if (resIp == false) {
+                infoIp.innerHTML = "IP должен быть в формате 255.255.255.255";
+                document.getElementById("myIp").value = ' ';
+            } else {
+                infoIp.innerHTML = "IP введен верно"
+            };
+        }
+
+        // проверка $
+        function checkPrice() {
+            var price = document.getElementById("myPrice").value;
+            var pattPrice = new RegExp(/^\$\d+(?:\.\d{0,2})$/);
+            var resPrice = pattPrice.test(price);
+            var infoPrice = document.getElementById('price');
+            if (resPrice == false) {
+                infoPrice.innerHTML = "Цена должна быть в формате $0.84, $2.84, $4";
+                document.getElementById("myPrice").value = '';
+            } else {
+                infoPrice.innerHTML = "Цена введена верно"
+            };
+        }
+
+        // проверка даты
+        function checkDate() {
+            var date = document.getElementById("myDate").value;
+            var pattDate = new RegExp(/^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/);
+            var resDate = pattDate.test(date);
+            var infoDate = document.getElementById('date');
+            if (resDate == false) {
+                infoDate.innerHTML = "Дата должна быть в формате 30/12/2016";
+                document.getElementById("myDate").value = '';
+            } else {
+                infoDate.innerHTML = "Дата введена верно"
+            };
+        }
+
+        function myFunction() {
+            checkIndex();
+            checkIp();
+            checkPrice();
+            checkDate()
+        }
+
+        // clear Index
+        var test = document.getElementById('myIndex');
+        test.onfocus = function() {
+            document.getElementById("index").innerHTML = ' ';
+        };
+
+        // clear Ip
+        var testIp = document.getElementById('myIp');
+        testIp.onfocus = function() {
+            document.getElementById("ip").innerHTML = ' ';
+        };
+
+        // clear Price
+        var testPrice = document.getElementById('myPrice');
+        testPrice.onfocus = function() {
+            document.getElementById("price").innerHTML = ' ';
+        };
+
+        // clear Date
+        var testDate = document.getElementById('myDate');
+        testDate.onfocus = function() {
+            document.getElementById("date").innerHTML = ' ';
+        };
+    </script>
+</body>
+
+</html>
