@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Project - Olena Rudenko</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <div id="container">
+        <div><img src="img/logo.png" id="logo"></div>
+        <div id="content"></div>
+        <button class="navigation" onclick="goPrevious()">Previous</button>
+        <button class="navigation" onclick="goNext()">Next</button>
+        <div id="details"></div>
+    </div>
+    <script type="text/javascript">
+        var apiResponse;
+        async function displayTableView(url) {
+            var response = await fetch(url);
+            apiResponse = await response.json();
+            var names = document.getElementById('content');
+            for (var i = 0; i <= apiResponse.results.length - 1; i++) {
+                var info = apiResponse.results[i];
+                var hero = document.createElement('button');
+                hero.classList.add('cards');
+                hero.innerHTML = apiResponse.results[i].name;
+                hero.setAttribute('onclick', 'showInfo(' + JSON.stringify(info) + ')');
+                names.appendChild(hero);
+            }
+        }
+
+        async function getExtraDetails(arr) {
+            if (arr !== null) {
+                var arrResponse = [];
+                for (var i = 0; i <= arr.length - 1; i++) {
+                    var data = await fetch(arr[i]);
+                    arrResponse[i] = await data.json();
+                }
+                return arrResponse;
+            }
+        }
+
+        var startpageUrl = 'https://swapi.dev/api/people/';
+        displayTableView(startpageUrl);
+
+        async function showInfo(info) {
+            clearDetails();
+            var details = document.getElementById('details');
+
+
+            var detailsName = document.createElement('div');
+            detailsName.innerHTML = 'Name: ' + info.name;
+            details.appendChild(detailsName);
+
+            var detailsBirthYear = document.createElement('div');
+            detailsBirthYear.innerHTML = 'Year of birth: ' + info.birth_year;
+            details.appendChild(detailsBirthYear);
+
+            var detailsGender = document.createElement('div');
+            detailsGender.innerHTML = 'Gender: ' + info.gender;
+            details.appendChild(detailsGender);
+
+            var detailsPlanet = document.createElement('div');
+            details.appendChild(detailsPlanet);
+            var arrPlanets = await getExtraDetails([info.homeworld]);
+            var planet = document.createElement('div');
+            planet.innerHTML = 'Planet: ' + arrPlanets[0].name;
+            details.appendChild(planet);
+
+            var detailsSpecies = document.createElement('ui');
+            details.appendChild(detailsSpecies);
+            var arrSpecies = await getExtraDetails(info.species);
+            if (arrSpecies !== null) {
+                var speciesLabel = document.createElement('div');
+                speciesLabel.innerHTML = 'Species: ';
+                details.appendChild(speciesLabel);
+                for (var i = 0; i <= arrSpecies.length - 1; i++) {
+                    var species = document.createElement('li');
+                    species.innerHTML = arrSpecies[i].name;
+                    details.appendChild(species);
+                }
+            }
+
+            var detailsFilms = document.createElement('ul');
+            details.appendChild(detailsFilms);
+            var arrFilms = await getExtraDetails(info.films);
+            if (arrFilms !== null) {
+                var filmsLabel = document.createElement('div');
+                filmsLabel.innerHTML = 'Films: ';
+                details.appendChild(filmsLabel);
+                for (var i = 0; i <= arrFilms.length - 1; i++) {
+                    var films = document.createElement('li');
+                    films.innerHTML = arrFilms[i].title;
+                    details.appendChild(films);
+                }
+            }
+
+        }
+
+        function clearData() {
+            document.getElementById('content').innerHTML = '';
+            document.getElementById('details').innerHTML = '';
+        }
+
+        function clearDetails() {
+            document.getElementById('details').innerHTML = '';
+        }
+
+        function goNext() {
+            if (apiResponse.next !== null) {
+                clearData();
+                displayTableView(apiResponse.next);
+            }
+        }
+
+        function goPrevious() {
+            if (apiResponse.previous !== null) {
+                clearData();
+                displayTableView(apiResponse.previous);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
